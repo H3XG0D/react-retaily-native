@@ -7,7 +7,8 @@
       "cypress",
       "@testing-library/cypress",
       "@types/styled-components-react-native"
-    ]
+    ],
+    "jsx": "react"
   },
   "extends": "@tsconfig/react-native/tsconfig.json"
 }
