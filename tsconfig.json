@@ -1,0 +1,13 @@
+{
+  "extends": "some/tsconfig.base",
+  "compilerOptions": {
+    // ...
+    "types": [
+      "jest",
+      "cypress",
+      "@testing-library/cypress",
+      "@types/styled-components-react-native"
+    ]
+  },
+  "extends": "@tsconfig/react-native/tsconfig.json"
+}
