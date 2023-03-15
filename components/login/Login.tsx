@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, SafeAreaView, Linking, TouchableOpacity, Text} from 'react-native';
 import styled from "styled-components/native"; // IMPORT CSS LIBRARY
+import { IStackScreenProps } from '../../navigation/StackScreen';
 import * as variables from './../../constants';
 
 const Logo = styled.View`
@@ -84,61 +85,62 @@ const LoginSignUp = styled.TextInput`
   text-decoration: underline;
 `;
 
-const LoginPage = () => {
+const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
   const [text, onChangeText] = React.useState('');
   const [password, onChangePassword] = React.useState('');
+  const { navigation } = props;
 
   return (
     <View>
-        <Logo>
-          <LogoImage
-            source={require('./images/logo.png')}
-          />
-        </Logo>
+      <Logo>
+        <LogoImage
+          source={require('./images/logo.png')}
+        />
+      </Logo>
 
-        <LoginHeader>
-          <LoginTitle>Вход</LoginTitle>
-          <LoginSubtitle>Введите логин или номер телефона</LoginSubtitle>
-        </LoginHeader>
+      <LoginHeader>
+        <LoginTitle>Вход</LoginTitle>
+        <LoginSubtitle>Введите логин или номер телефона</LoginSubtitle>
+      </LoginHeader>
 
-        <Login>
-          <SafeAreaView>
-            <LoginInput
-              onChangeText={onChangeText}
-              value={text}
-              placeholder="Введите логин"
-            >
-            </LoginInput>
+      <Login>
+        <SafeAreaView>
+          <LoginInput
+            onChangeText={onChangeText}
+            value={text}
+            placeholder="Введите логин"
+          >
+          </LoginInput>
 
-            <LoginInput
-              onChangeText={onChangePassword}
-              value={password}
-              placeholder="Пароль"
-              secureTextEntry={true}
-            >
-            </LoginInput>
+          <LoginInput
+            onChangeText={onChangePassword}
+            value={password}
+            placeholder="Пароль"
+            secureTextEntry={true}
+          >
+          </LoginInput>
 
-            <LoginForgetPassword
-              onPressIn={() => Linking.openURL('http://google.com')}
-            >
-              Забыли пароль?
-            </LoginForgetPassword>
+          <LoginForgetPassword
+            onPressIn={() => Linking.openURL('http://google.com')}
+          >
+            Забыли пароль?
+          </LoginForgetPassword>
 
-            <TouchableOpacity onPress={() => {/* TODO */
-            }}>
-              <LoginSignIn>
-                <LoginSignInText>Войти</LoginSignInText>
-              </LoginSignIn>
-            </TouchableOpacity>
-          </SafeAreaView>
+          <TouchableOpacity onPress={() => {/* TODO */
+          }}>
+            <LoginSignIn>
+              <LoginSignInText>Войти</LoginSignInText>
+            </LoginSignIn>
+          </TouchableOpacity>
+        </SafeAreaView>
 
-          <LoginSignUpText>Нет аккаунта?
-            <LoginSignUp
-              onPressIn={() => ''}
-            > Зарегистрироваться</LoginSignUp>
-          </LoginSignUpText>
+        <LoginSignUpText>Нет аккаунта?
+          <LoginSignUp
+            onPressIn={() => navigation.navigate('Registration')}
+          > Зарегистрироваться</LoginSignUp>
+        </LoginSignUpText>
 
-        </Login>
+      </Login>
     </View>
   );
 }
