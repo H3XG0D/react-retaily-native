@@ -1,6 +1,7 @@
 import {IRouteProps} from "../../navigation/RouteProp";
 import Login from "../../components/login/Login";
 import Registration from "../../components/login/registration/Registration";
+import Code from "../../components/login/registration/Code";
 
 const routes: IRouteProps[] = [
   {
@@ -10,6 +11,10 @@ const routes: IRouteProps[] = [
   {
     name: 'Registration',
     component: Registration
+  },
+  {
+    name: 'Code',
+    component: Code
   }
 ]
 

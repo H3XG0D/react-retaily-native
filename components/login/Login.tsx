@@ -1,7 +1,10 @@
 import React from 'react';
+
 import {View, SafeAreaView, Linking, TouchableOpacity, Text} from 'react-native';
-import styled from "styled-components/native"; // IMPORT CSS LIBRARY
 import {IStackScreenProps} from '../../navigation/StackScreen';
+
+import styled from "styled-components/native";
+// IMPORT CSS LIBRARY
 import * as variables from './../../constants';
 
 const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
@@ -38,8 +41,7 @@ const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
           </LoginInput>
 
           <LoginForgetPassword
-            onPressIn={() => ''}
-            autoCorrect={false}
+            onPress={() => ''}
           >
             Забыли пароль?
           </LoginForgetPassword>
@@ -54,7 +56,7 @@ const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
 
         <LoginSignUpView>
           <LoginSignUpText>Нет аккаунта? <LoginSignUp
-            onPressIn={() => navigation.navigate('Registration')}>Зарегистрироваться</LoginSignUp>
+            onPress={() => navigation.navigate('Registration')}>Зарегистрироваться</LoginSignUp>
           </LoginSignUpText>
         </LoginSignUpView>
 
@@ -111,9 +113,10 @@ const LoginInput = styled.TextInput`
   padding: 10px;
 `;
 
-const LoginForgetPassword = styled.TextInput`
+const LoginForgetPassword = styled.Text`
   color: ${variables.COLORS.secondary};
   font-weight: ${variables.SIZES.bold};
+  margin-top: ${variables.SIZES.top};
   text-decoration: underline;
 `;
 
@@ -138,9 +141,10 @@ const LoginSignUpView = styled.View`
 
 const LoginSignUpText = styled.Text`
   font-size: ${variables.SIZES.font};
+  color: ${variables.COLORS.black};
 `;
 
-const LoginSignUp = styled.TextInput`
+const LoginSignUp = styled.Text`
   color: ${variables.COLORS.secondary};
   font-weight: ${variables.SIZES.bold};
   text-decoration: underline;

@@ -4,6 +4,8 @@ import 'react-native-gesture-handler';
 import {createStackNavigator} from "@react-navigation/stack";
 import {NavigationContainer} from "@react-navigation/native";
 import routes from './src/config/routes';
+import {StatusBar} from "react-native";
+import * as variables from './constants';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +19,7 @@ function App() {
           </Stack.Screen>
         ))}
       </Stack.Navigator>
+      <StatusBar backgroundColor={variables.COLORS.forth}/>
     </NavigationContainer>
   );
 }
