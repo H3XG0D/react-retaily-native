@@ -3,10 +3,22 @@ import {SafeAreaView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedbac
 import styled from 'styled-components/native';
 import * as variables from './../../../constants';
 import {IStackScreenProps} from "../../../navigation/StackScreen";
+import {useAsyncStorage} from "@react-native-community/async-storage";
 
 const Registration: React.FunctionComponent<IStackScreenProps> = props => {
   const {navigation} = props;
-  const [text, onChangeText] = React.useState('');
+  const [number, onChangeText] = React.useState('');
+  const [numberError, setNumberError] = React.useState('');
+
+  const validate = () => {
+    if (number.length < 11) {
+      setNumberError('Полностью впишите свой номер')
+    } else if (number.indexOf(' ') >= 0) {
+      setNumberError('Номер не может содержать пробелы')
+    } else {
+      setNumberError('');
+    }
+  }
 
   return (
     <Register>
@@ -17,8 +29,8 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
         <RegisterContainer>
           <RegisterNumber>8</RegisterNumber>
           <TextInput
-            onChangeText={onChangeText}
-            value={text}
+            onChangeText={number => onChangeText(number)}
+            value={number}
             placeholder="999-999-999"
             keyboardType="numeric"
             maxLength={10}
@@ -27,6 +39,7 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
           />
         </RegisterContainer>
       </TouchableWithoutFeedback>
+      <RegisterErrorText>{numberError}</RegisterErrorText>
 
       <RegisterInfo>
         Ваш номер телефона будет использоваться в качестве логина для входа в
@@ -36,9 +49,8 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
       }}>
 
         <RegisterSubmit>
-          <RegisterSubmitText onPress={() => navigation.navigate('Code')}>Подтвердить</RegisterSubmitText>
+          <RegisterSubmitText onPress={() => validate()} onPressIn={() => navigation.navigate('Code')}>Подтвердить</RegisterSubmitText>
         </RegisterSubmit>
-
       </TouchableOpacity>
     </Register>
   );
@@ -89,7 +101,7 @@ const RegisterInfo = styled.Text`
 const RegisterSubmit = styled.View`
   background-color: ${variables.COLORS.fifth};
   border-radius: ${variables.SIZES.radius};
-  margin-top: 40px;
+  margin-top: 30px;
 
   margin-left: auto;
   margin-right: auto;
@@ -104,6 +116,12 @@ const RegisterSubmit = styled.View`
 const RegisterSubmitText = styled.Text`
   color: ${variables.COLORS.white};
   font-size: ${variables.SIZES.h4};
+`;
+
+const RegisterErrorText = styled.Text`
+  color: ${variables.COLORS.red};
+  font-size: 12px;
+  margin-left: 20px;
 `;
 
 export default Registration;
