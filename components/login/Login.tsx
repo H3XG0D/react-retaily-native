@@ -1,8 +1,67 @@
 import React from 'react';
 import {View, SafeAreaView, Linking, TouchableOpacity, Text} from 'react-native';
 import styled from "styled-components/native"; // IMPORT CSS LIBRARY
-import { IStackScreenProps } from '../../navigation/StackScreen';
+import {IStackScreenProps} from '../../navigation/StackScreen';
 import * as variables from './../../constants';
+
+const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
+  const [text, onChangeText] = React.useState('');
+  const [password, onChangePassword] = React.useState('');
+  const {navigation} = props;
+
+  return (
+    <View>
+      <Logo>
+        <LogoImage source={require('./images/logo.png')}/>
+      </Logo>
+
+      <LoginHeader>
+        <LoginTitle>Вход</LoginTitle>
+        <LoginSubtitle>Введите логин или номер телефона</LoginSubtitle>
+      </LoginHeader>
+
+      <Login>
+        <SafeAreaView>
+          <LoginInput
+            onChangeText={onChangeText}
+            value={text}
+            placeholder="Введите логин"
+          >
+          </LoginInput>
+
+          <LoginInput
+            onChangeText={onChangePassword}
+            value={password}
+            placeholder="Пароль"
+            secureTextEntry={true}
+          >
+          </LoginInput>
+
+          <LoginForgetPassword
+            onPressIn={() => ''}
+            autoCorrect={false}
+          >
+            Забыли пароль?
+          </LoginForgetPassword>
+
+          <TouchableOpacity onPress={() => {/* TODO */
+          }}>
+            <LoginSignIn>
+              <LoginSignInText>Войти</LoginSignInText>
+            </LoginSignIn>
+          </TouchableOpacity>
+        </SafeAreaView>
+
+        <LoginSignUpView>
+          <LoginSignUpText>Нет аккаунта? <LoginSignUp
+            onPressIn={() => navigation.navigate('Registration')}>Зарегистрироваться</LoginSignUp>
+          </LoginSignUpText>
+        </LoginSignUpView>
+
+      </Login>
+    </View>
+  );
+}
 
 const Logo = styled.View`
   justify-content: center;
@@ -20,7 +79,6 @@ const LogoImage = styled.Image`
 `;
 
 const Login = styled.View`
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -74,9 +132,12 @@ const LoginSignInText = styled.Text`
   font-weight: ${variables.SIZES.bold};
 `;
 
+const LoginSignUpView = styled.View`
+  margin-top: 30px;
+`;
+
 const LoginSignUpText = styled.Text`
   font-size: ${variables.SIZES.font};
-  margin-top: 30px;
 `;
 
 const LoginSignUp = styled.TextInput`
@@ -84,65 +145,5 @@ const LoginSignUp = styled.TextInput`
   font-weight: ${variables.SIZES.bold};
   text-decoration: underline;
 `;
-
-const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
-  const [text, onChangeText] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
-  const { navigation } = props;
-
-  return (
-    <View>
-      <Logo>
-        <LogoImage
-          source={require('./images/logo.png')}
-        />
-      </Logo>
-
-      <LoginHeader>
-        <LoginTitle>Вход</LoginTitle>
-        <LoginSubtitle>Введите логин или номер телефона</LoginSubtitle>
-      </LoginHeader>
-
-      <Login>
-        <SafeAreaView>
-          <LoginInput
-            onChangeText={onChangeText}
-            value={text}
-            placeholder="Введите логин"
-          >
-          </LoginInput>
-
-          <LoginInput
-            onChangeText={onChangePassword}
-            value={password}
-            placeholder="Пароль"
-            secureTextEntry={true}
-          >
-          </LoginInput>
-
-          <LoginForgetPassword
-            onPressIn={() => Linking.openURL('http://google.com')}
-          >
-            Забыли пароль?
-          </LoginForgetPassword>
-
-          <TouchableOpacity onPress={() => {/* TODO */
-          }}>
-            <LoginSignIn>
-              <LoginSignInText>Войти</LoginSignInText>
-            </LoginSignIn>
-          </TouchableOpacity>
-        </SafeAreaView>
-
-        <LoginSignUpText>Нет аккаунта?
-          <LoginSignUp
-            onPressIn={() => navigation.navigate('Registration')}
-          > Зарегистрироваться</LoginSignUp>
-        </LoginSignUpText>
-
-      </Login>
-    </View>
-  );
-}
 
 export default LoginPage;
