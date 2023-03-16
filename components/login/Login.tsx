@@ -46,8 +46,10 @@ const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
             Забыли пароль?
           </LoginForgetPassword>
 
-          <TouchableOpacity onPress={() => {/* TODO */
-          }}>
+          <TouchableOpacity
+            onPress={() => {/* TODO */}}
+            style={{marginTop: 10}}
+          >
             <LoginSignIn>
               <LoginSignInText>Войти</LoginSignInText>
             </LoginSignIn>
@@ -95,6 +97,7 @@ const LoginHeader = styled.View`
 
 const LoginTitle = styled.Text`
   font-size: ${variables.SIZES.h2};
+  color: ${variables.COLORS.black};
   font-weight: 600;
   padding-bottom: 20px;
 `;

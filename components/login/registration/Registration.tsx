@@ -1,5 +1,14 @@
 import React from "react";
-import {SafeAreaView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import {
+  Alert,
+  Button,
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
 import styled from 'styled-components/native';
 import * as variables from './../../../constants';
 import {IStackScreenProps} from "../../../navigation/StackScreen";
@@ -7,19 +16,56 @@ import {useAsyncStorage} from "@react-native-community/async-storage";
 
 const Registration: React.FunctionComponent<IStackScreenProps> = props => {
   const {navigation} = props;
-  const [number, onChangeText] = React.useState('');
-  const [numberError, setNumberError] = React.useState('');
+  const [number, onChangeText] = React.useState<any>('');
+  const [numberError, setNumberError] = React.useState<any>('');
+  const [disable, setDisable] = React.useState<boolean>(true);
 
   const validate = () => {
-    if (number.length < 11) {
+    if (number.length < 15) {
       setNumberError('Полностью впишите свой номер')
-    } else if (number.indexOf(' ') >= 0) {
-      setNumberError('Номер не может содержать пробелы')
     } else {
-      setNumberError('');
+      setDisable(false);
+      setNumberError(true);
+      let str = number
+        .replace(' ', '')
+        .replace('-', '')
+        .replace('-', '')
+        .replace('(', '')
+        .replace(')', '')
+      navigation.navigate('Code');
     }
   }
 
+  const validateNumberElements = (number: string) => {
+    let i = "("
+    if (!number.includes('(')) {
+      number = '(' + number;
+    }
+    if (!number.includes(')') && number.length > 4) {
+      let strBefore = number.slice(0, 4)
+      let strAfter = number.slice(4)
+      number = strBefore + ')' + strAfter
+    }
+    if (!number.includes(' ') && number.length > 5) {
+      let strBefore = number.slice(0, 5)
+      let strAfter = number.slice(5)
+      number = strBefore + ' ' + strAfter
+    }
+    if (!number.includes('-') && number.length > 9) {
+      let strBefore = number.slice(0, 9)
+      let strAfter = number.slice(9)
+      number = strBefore + '-' + strAfter
+    }
+    if (number.length > 12 && (number.match(/-/g) || []).length < 2) {
+      let strBefore = number.slice(0, 12)
+      let strAfter = number.slice(12)
+      number = strBefore + '-' + strAfter
+    }
+    onChangeText(number)
+
+  }
+
+  // @ts-ignore
   return (
     <Register>
       <RegisterTitle>Регистрация</RegisterTitle>
@@ -29,12 +75,12 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
         <RegisterContainer>
           <RegisterNumber>8</RegisterNumber>
           <TextInput
-            onChangeText={number => onChangeText(number)}
+            onChangeText={number => validateNumberElements(number)}
             value={number}
-            placeholder="999-999-999"
+            placeholder="999-999-99-99"
             keyboardType="numeric"
-            maxLength={10}
-            numberOfLines={10}
+            maxLength={15}
+            numberOfLines={15}
             style={{width: 330}}
           />
         </RegisterContainer>
@@ -42,15 +88,16 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
       <RegisterErrorText>{numberError}</RegisterErrorText>
 
       <RegisterInfo>
-        Ваш номер телефона будет использоваться в качестве логина для входа в
+        Ваш номер телефона будет использоваться в качестве логина для входа в Ритейли
       </RegisterInfo>
 
       <TouchableOpacity onPress={() => {/* TODO */
       }}>
 
         <RegisterSubmit>
-          <RegisterSubmitText onPress={() => validate()} onPressIn={() => navigation.navigate('Code')}>Подтвердить</RegisterSubmitText>
+          <RegisterSubmitText onPress={() => validate()}>Подтвердить</RegisterSubmitText>
         </RegisterSubmit>
+
       </TouchableOpacity>
     </Register>
   );
@@ -102,13 +149,10 @@ const RegisterSubmit = styled.View`
   background-color: ${variables.COLORS.fifth};
   border-radius: ${variables.SIZES.radius};
   margin-top: 30px;
-
   margin-left: auto;
   margin-right: auto;
-
   align-items: center;
   justify-content: center;
-
   width: 120px;
   height: 35px;
 `;
