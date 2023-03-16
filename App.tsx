@@ -6,7 +6,6 @@ import {NavigationContainer} from "@react-navigation/native";
 import routes from './src/config/routes';
 import {StatusBar} from "react-native";
 import * as variables from './constants';
-
 const Stack = createStackNavigator();
 
 function App() {

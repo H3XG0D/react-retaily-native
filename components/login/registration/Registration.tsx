@@ -12,7 +12,6 @@ import {
 import styled from 'styled-components/native';
 import * as variables from './../../../constants';
 import {IStackScreenProps} from "../../../navigation/StackScreen";
-import {useAsyncStorage} from "@react-native-community/async-storage";
 
 const Registration: React.FunctionComponent<IStackScreenProps> = props => {
   const {navigation} = props;
@@ -26,13 +25,15 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
     } else {
       setDisable(false);
       setNumberError(true);
-      let str = number
+
+      const userNumber = number
         .replace(' ', '')
         .replace('-', '')
         .replace('-', '')
         .replace('(', '')
         .replace(')', '')
-      navigation.navigate('Code');
+
+      navigation.navigate('Code', {userNumber});
     }
   }
 
@@ -62,10 +63,8 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
       number = strBefore + '-' + strAfter
     }
     onChangeText(number)
-
   }
 
-  // @ts-ignore
   return (
     <Register>
       <RegisterTitle>Регистрация</RegisterTitle>

@@ -12,6 +12,7 @@ export const COLORS = {
   red: '#c10020',
   gray: '#6A6A6A',
   milky: '#F4F4F4',
+  gold: '#FAFAD2',
 }
 
 export const SIZES = {
@@ -24,11 +25,12 @@ export const SIZES = {
 
   // Font Size
   h1: 30,
-  h2: 22,
-  h3: 16,
-  h4: 13,
-  h5: 12,
-  h6: 10,
+  h2: 25,
+  h3: 22,
+  h4: 16,
+  h5: 13,
+  h6: 12,
+  h7: 10,
 
   title: 23,
   bold: 500,

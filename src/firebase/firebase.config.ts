@@ -1,10 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import {firebase} from "@react-native-firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDWMsTUt-nc6HxhxOijdac7KPfbSzmoZ6c",
   authDomain: "otp-verification-25baa.firebaseapp.com",
   projectId: "otp-verification-25baa",
@@ -15,3 +12,5 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+export { firebase };
