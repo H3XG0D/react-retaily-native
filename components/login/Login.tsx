@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {View, SafeAreaView, Linking, TouchableOpacity, Text} from 'react-native';
+import {View, SafeAreaView, TouchableOpacity} from 'react-native';
 import {IStackScreenProps} from '../../navigation/StackScreen';
 
 import styled from "styled-components/native";
@@ -11,6 +11,10 @@ const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
   const [text, onChangeText] = React.useState('');
   const [password, onChangePassword] = React.useState('');
   const {navigation} = props;
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({headerShown: false});
+  }, [navigation]);
 
   return (
     <View>

@@ -6,12 +6,14 @@ import {NavigationContainer} from "@react-navigation/native";
 import routes from './src/config/routes';
 import {StatusBar} from "react-native";
 import * as variables from './constants';
+
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={'Login'} screenOptions={{headerShown: false}}>
+      <Stack.Navigator initialRouteName={'Login'}
+                       screenOptions={{headerTitleAlign: 'center', headerTitleStyle: {fontSize: 24}}}>
         {routes.map((r, i) => (
           <Stack.Screen name={r.name} key={i}>
             {(props) => <r.component nameProp={r.name} {...props} />}
@@ -22,4 +24,5 @@ function App() {
     </NavigationContainer>
   );
 }
+
 export default App;

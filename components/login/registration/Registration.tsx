@@ -1,13 +1,9 @@
 import React from "react";
 import {
-  Alert,
-  Button,
-  SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
 } from 'react-native';
 import styled from 'styled-components/native';
 import * as variables from './../../../constants';
@@ -18,6 +14,10 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
   const [number, onChangeText] = React.useState<any>('');
   const [numberError, setNumberError] = React.useState<any>('');
   const [disable, setDisable] = React.useState<boolean>(true);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({headerTitle: "Регистрация"});
+  }, [navigation]);
 
   const validate = () => {
     if (number.length < 15) {
@@ -67,7 +67,6 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
 
   return (
     <Register>
-      <RegisterTitle>Регистрация</RegisterTitle>
       <RegisterSubtitle>Телефон <Text style={{color: variables.COLORS.red}}>*</Text></RegisterSubtitle>
 
       <TouchableWithoutFeedback>
@@ -103,19 +102,13 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
 }
 
 const Register = styled.View`
-  margin-top: 60px;
-`;
-
-const RegisterTitle = styled.Text`
-  color: ${variables.COLORS.black};
-  font-size: ${variables.SIZES.title};
-  padding-bottom: 15px;
-  text-align: center;
+  margin-top: 30px;
 `;
 
 const RegisterSubtitle = styled.Text`
   font-size: ${variables.SIZES.h5};
   margin-left: 30px;
+  margin-bottom: 10px;
 `;
 
 const RegisterNumber = styled.Text`
