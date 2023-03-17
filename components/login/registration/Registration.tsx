@@ -8,67 +8,71 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View
-} from 'react-native';
-import styled from 'styled-components/native';
-import * as variables from './../../../constants';
-import {IStackScreenProps} from "../../../navigation/StackScreen";
+} from "react-native";
+import styled from "styled-components/native";
+import * as variables from "./../../../constants";
+import { IStackScreenProps } from "../../../navigation/StackScreen";
 
 const Registration: React.FunctionComponent<IStackScreenProps> = props => {
-  const {navigation} = props;
-  const [number, onChangeText] = React.useState<any>('');
-  const [numberError, setNumberError] = React.useState<any>('');
+  const { navigation } = props;
+  const [number, onChangeText] = React.useState<any>("");
+  const [numberError, setNumberError] = React.useState<any>("");
   const [disable, setDisable] = React.useState<boolean>(true);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({ headerTitle: "Подтверждение" });
+  }, [navigation]);
 
   const validate = () => {
     if (number.length < 15) {
-      setNumberError('Полностью впишите свой номер')
+      setNumberError("Полностью впишите свой номер");
     } else {
       setDisable(false);
       setNumberError(true);
 
       const userNumber = number
-        .replace(' ', '')
-        .replace('-', '')
-        .replace('-', '')
-        .replace('(', '')
-        .replace(')', '')
+        .replace(" ", "")
+        .replace("-", "")
+        .replace("-", "")
+        .replace("(", "")
+        .replace(")", "");
 
-      navigation.navigate('Code', {userNumber});
+      navigation.navigate("Code", { userNumber });
     }
-  }
+  };
 
   const validateNumberElements = (number: string) => {
-    let i = "("
-    if (!number.includes('(')) {
-      number = '(' + number;
+    let i = "(";
+    if (!number.includes("(")) {
+      number = "(" + number;
     }
-    if (!number.includes(')') && number.length > 4) {
-      let strBefore = number.slice(0, 4)
-      let strAfter = number.slice(4)
-      number = strBefore + ')' + strAfter
+    if (!number.includes(")") && number.length > 4) {
+      let strBefore = number.slice(0, 4);
+      let strAfter = number.slice(4);
+      number = strBefore + ")" + strAfter;
     }
-    if (!number.includes(' ') && number.length > 5) {
-      let strBefore = number.slice(0, 5)
-      let strAfter = number.slice(5)
-      number = strBefore + ' ' + strAfter
+    if (!number.includes(" ") && number.length > 5) {
+      let strBefore = number.slice(0, 5);
+      let strAfter = number.slice(5);
+      number = strBefore + " " + strAfter;
     }
-    if (!number.includes('-') && number.length > 9) {
-      let strBefore = number.slice(0, 9)
-      let strAfter = number.slice(9)
-      number = strBefore + '-' + strAfter
+    if (!number.includes("-") && number.length > 9) {
+      let strBefore = number.slice(0, 9);
+      let strAfter = number.slice(9);
+      number = strBefore + "-" + strAfter;
     }
     if (number.length > 12 && (number.match(/-/g) || []).length < 2) {
-      let strBefore = number.slice(0, 12)
-      let strAfter = number.slice(12)
-      number = strBefore + '-' + strAfter
+      let strBefore = number.slice(0, 12);
+      let strAfter = number.slice(12);
+      number = strBefore + "-" + strAfter;
     }
-    onChangeText(number)
-  }
+    onChangeText(number);
+  };
 
   return (
     <Register>
       <RegisterTitle>Регистрация</RegisterTitle>
-      <RegisterSubtitle>Телефон <Text style={{color: variables.COLORS.red}}>*</Text></RegisterSubtitle>
+      <RegisterSubtitle>Телефон <Text style={{ color: variables.COLORS.red }}>*</Text></RegisterSubtitle>
 
       <TouchableWithoutFeedback>
         <RegisterContainer>
@@ -80,7 +84,7 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
             keyboardType="numeric"
             maxLength={15}
             numberOfLines={15}
-            style={{width: 330}}
+            style={{ width: 330 }}
           />
         </RegisterContainer>
       </TouchableWithoutFeedback>
@@ -100,7 +104,7 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
       </TouchableOpacity>
     </Register>
   );
-}
+};
 
 const Register = styled.View`
   margin-top: 60px;

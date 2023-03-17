@@ -1,21 +1,25 @@
-import React from 'react';
+import React from "react";
 
-import {View, SafeAreaView, Linking, TouchableOpacity, Text} from 'react-native';
-import {IStackScreenProps} from '../../navigation/StackScreen';
+import { View, SafeAreaView, Linking, TouchableOpacity, Text } from "react-native";
+import { IStackScreenProps } from "../../navigation/StackScreen";
 
 import styled from "styled-components/native";
 // IMPORT CSS LIBRARY
-import * as variables from './../../constants';
+import * as variables from "./../../constants";
 
 const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
-  const [text, onChangeText] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
-  const {navigation} = props;
+  const [text, onChangeText] = React.useState("");
+  const [password, onChangePassword] = React.useState("");
+  const { navigation } = props;
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
 
   return (
     <View>
       <Logo>
-        <LogoImage source={require('./images/logo.png')}/>
+        <LogoImage source={require("./images/logo.png")} />
       </Logo>
 
       <LoginHeader>
@@ -41,14 +45,15 @@ const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
           </LoginInput>
 
           <LoginForgetPassword
-            onPress={() => ''}
+            onPress={() => ""}
           >
             Забыли пароль?
           </LoginForgetPassword>
 
           <TouchableOpacity
-            onPress={() => {/* TODO */}}
-            style={{marginTop: 10}}
+            onPress={() => {/* TODO */
+            }}
+            style={{ marginTop: 10 }}
           >
             <LoginSignIn>
               <LoginSignInText>Войти</LoginSignInText>
@@ -58,14 +63,14 @@ const LoginPage: React.FunctionComponent<IStackScreenProps> = props => {
 
         <LoginSignUpView>
           <LoginSignUpText>Нет аккаунта? <LoginSignUp
-            onPress={() => navigation.navigate('Registration')}>Зарегистрироваться</LoginSignUp>
+            onPress={() => navigation.navigate("Registration")}>Зарегистрироваться</LoginSignUp>
           </LoginSignUpText>
         </LoginSignUpView>
 
       </Login>
     </View>
   );
-}
+};
 
 const Logo = styled.View`
   justify-content: center;
