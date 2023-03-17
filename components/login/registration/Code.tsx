@@ -21,7 +21,7 @@ const Code: React.FunctionComponent<IStackScreenProps> = props => {
   const thirdInput = useRef<any>();
   const fourthInput = useRef<any>();
 
-  const [otp, setOtp] = useState<any>({1: '', 2: '', 3: '', 4: ''});
+  const [otp, setOtp] = useState<any>({ 1: "", 2: "", 3: "", 4: "" });
 
   return (
     <CodeContainer>
@@ -36,8 +36,8 @@ const Code: React.FunctionComponent<IStackScreenProps> = props => {
             maxLength={1}
             ref={firstInput}
             onChangeText={(text) => {
-              setOtp({...otp, 1: text})
-              text && secondInput.current.focus()
+              setOtp({ ...otp, 1: text });
+              text && secondInput.current.focus();
             }}
           />
         </CodeBox>
@@ -49,8 +49,8 @@ const Code: React.FunctionComponent<IStackScreenProps> = props => {
             maxLength={1}
             ref={secondInput}
             onChangeText={(text) => {
-              setOtp({...otp, 2: text})
-              text ? thirdInput.current.focus() : firstInput.current.focus()
+              setOtp({ ...otp, 2: text });
+              text ? thirdInput.current.focus() : firstInput.current.focus();
             }}
           />
         </CodeBox>
@@ -62,8 +62,8 @@ const Code: React.FunctionComponent<IStackScreenProps> = props => {
             maxLength={1}
             ref={thirdInput}
             onChangeText={(text) => {
-              setOtp({...otp, 3: text})
-              text ? fourthInput.current.focus() : secondInput.current.focus()
+              setOtp({ ...otp, 3: text });
+              text ? fourthInput.current.focus() : secondInput.current.focus();
             }}
           />
         </CodeBox>
@@ -75,17 +75,23 @@ const Code: React.FunctionComponent<IStackScreenProps> = props => {
             maxLength={1}
             ref={fourthInput}
             onChangeText={(text) => {
-              setOtp({...otp, 4: text})
-              !text && thirdInput.current.focus()
+              setOtp({ ...otp, 4: text });
+              !text && thirdInput.current.focus();
             }}
           />
         </CodeBox>
       </CodeContent>
 
-      <TouchableOpacity onPress={() => {/* TODO */ }}>
+      <TouchableOpacity>
+        <CodeResend>Переотправить код</CodeResend>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => {/* TODO */
+      }}>
 
         <CodeSubmit>
-          <CodeSubmitText onPress={() => console.log(otp)}>Подтвердить</CodeSubmitText>
+          <CodeSubmitText onPress={() => console.log(otp)}
+                          onPressIn={() => navigation.navigate("Details", { userNumber })}>Продолжить</CodeSubmitText>
         </CodeSubmit>
 
       </TouchableOpacity>
@@ -116,7 +122,7 @@ const CodeSubtitle = styled.Text`
 
 const CodeNumber = styled.Text`
   color: ${variables.COLORS.black};
-  font-size: ${variables.SIZES.h4};
+  font-size: ${variables.SIZES.h3};
   font-weight: ${variables.SIZES.bold};
 `;
 
@@ -131,25 +137,33 @@ const CodeContent = styled.View`
 
 const CodeBox = styled.View`
   border-radius: 3px;
-  border-color: ${variables.COLORS.primary};
+  border-color: ${variables.COLORS.gray};
   border-width: 1px;
 `;
 
 const CodeInput = styled.TextInput`
   font-size: 30px;
+  background-color: #FBFBFE;
   color: ${variables.COLORS.black};
+  font-weight: ${variables.SIZES.bold};
   text-align: center;
+`;
+
+const CodeResend = styled.Text`
+  padding-top: 6%;
+  font-size: ${variables.SIZES.h7};
+  text-decoration: underline;
 `;
 
 const CodeSubmit = styled.View`
   background-color: ${variables.COLORS.fifth};
   border-radius: ${variables.SIZES.radius};
-  margin-top: 40px;
+  margin-top: 35px;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
   justify-content: center;
-  width: 160px;
+  width: 350px;
   height: 55px;
 `;
 

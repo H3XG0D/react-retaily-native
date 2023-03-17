@@ -20,7 +20,7 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
   const [disable, setDisable] = React.useState<boolean>(true);
 
   React.useLayoutEffect(() => {
-    navigation.setOptions({ headerTitle: "Подтверждение" });
+    navigation.setOptions({ headerTitle: "Регистрация" });
   }, [navigation]);
 
   const validate = () => {
@@ -71,7 +71,6 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
 
   return (
     <Register>
-      <RegisterTitle>Регистрация</RegisterTitle>
       <RegisterSubtitle>Телефон <Text style={{ color: variables.COLORS.red }}>*</Text></RegisterSubtitle>
 
       <TouchableWithoutFeedback>
@@ -107,14 +106,7 @@ const Registration: React.FunctionComponent<IStackScreenProps> = props => {
 };
 
 const Register = styled.View`
-  margin-top: 60px;
-`;
-
-const RegisterTitle = styled.Text`
-  color: ${variables.COLORS.black};
-  font-size: ${variables.SIZES.title};
-  padding-bottom: 15px;
-  text-align: center;
+  margin-top: 30px;
 `;
 
 const RegisterSubtitle = styled.Text`
@@ -144,20 +136,20 @@ const RegisterInfo = styled.Text`
   margin-left: 30px;
   margin-top: 5px;
   line-height: 18px;
-  font-size: ${variables.SIZES.h5};
+  font-size: ${variables.SIZES.h6};
   width: 300px;
 `;
 
 const RegisterSubmit = styled.View`
   background-color: ${variables.COLORS.fifth};
   border-radius: ${variables.SIZES.radius};
-  margin-top: 30px;
+  margin-top: 35px;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 35px;
+  width: 350px;
+  height: 55px;
 `;
 
 const RegisterSubmitText = styled.Text`
