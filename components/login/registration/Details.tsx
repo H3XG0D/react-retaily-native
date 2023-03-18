@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import * as variables from "./../../../constants";
 import { IStackScreenProps } from "../../../navigation/StackScreen";
@@ -29,34 +29,36 @@ const Details: React.FunctionComponent<IStackScreenProps> = props => {
   }, [navigation]);
 
   const validate = () => {
-    if (fio.length < 0) {
-      setFioError('Полностью впишите своё ФИО')
-    } else {
-      setFioError('')
-    }
+      if (fio.length < 0) {
+        setFioError('Полностью впишите своё ФИО')
+      } else {
+        setFioError(false)
+      }
 
-    if (email.length < 0) {
-      setEmailError('Полностью впишите свою почту')
-    } else {
-      setEmailError('')
-    }
+      if (email.length < 0) {
+        setEmailError('Полностью впишите свою почту')
+      } else {
+        setEmailError(false)
+      }
 
-    if (password.length < 0) {
-      setPasswordError('Полностью впишите свой пароль')
-    } else if (password.length < 6) {
-      setPasswordError('Пароль должен быть больше 6 символов')
-    }  else {
-      setPasswordError('')
-    }
+      if (password.length < 0) {
+        setPasswordError('Полностью впишите свой пароль')
+      } else if (password.length < 6) {
+        setPasswordError('Пароль должен быть больше 6 символов')
+      }  else {
+        setPasswordError(false)
+      }
 
-    if (passwordCheck.length < 0) {
-      setPasswordCheckError('Полностью впишите свой пароль')
-    } else if (passwordCheck.length < 6) {
-      setPasswordCheckError('Пароль должен быть больше 6 символов')
-    }  else {
-      setPasswordCheckError('')
-    }
-  }
+      if (passwordCheck.length < 0) {
+        setPasswordCheckError('Полностью впишите свой пароль')
+      } else if (passwordCheck.length < 6) {
+        setPasswordCheckError('Пароль должен быть больше 6 символов')
+      }  else {
+        setPasswordCheckError(false)
+      }
+      setDisable(false);
+      navigation.navigate('Next')
+  };
 
   return (
     <ScrollView>
@@ -109,7 +111,7 @@ const Details: React.FunctionComponent<IStackScreenProps> = props => {
           }}>
 
             <DetailsSubmit>
-              <DetailsSubmitText onPress={() => ""}>Подтвердить</DetailsSubmitText>
+              <DetailsSubmitText onPress={() => validate()}>Подтвердить</DetailsSubmitText>
             </DetailsSubmit>
 
           </TouchableOpacity>

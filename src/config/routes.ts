@@ -3,6 +3,7 @@ import Login from "../../components/login/Login";
 import Registration from "../../components/login/registration/Registration";
 import Code from "../../components/login/registration/Code";
 import Details from "../../components/login/registration/Details";
+import Next from "../../components/login/registration/Next";
 
 const routes: IRouteProps[] = [
   {
@@ -20,6 +21,10 @@ const routes: IRouteProps[] = [
   {
     name: 'Details',
     component: Details,
+  },
+  {
+    name: 'Next',
+    component: Next,
   }
 ]
 
